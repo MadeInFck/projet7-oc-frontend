@@ -1,6 +1,12 @@
 const state = {
   currentLat: 48.852937,
-  currentLong: 2.35005
+  currentLong: 2.35005,
+  bounds: {
+      north: 0,
+      south: 0,
+      east: 0,
+      west: 0
+  }
 };
 
 const mutations = {
@@ -10,16 +16,22 @@ const mutations = {
     },
     setCurrentLong: (state, long) => {
         state.currentLong = long;
+    },
+    setBounds: (state, bounds) => {
+        state.bounds = bounds;
     }
 };
 
 const actions = {
 
-    updateCurrentLat: ({commit}, lat) => {
+    updateCurrentLat: ({ commit }, lat) => {
         commit('setCurrentLat', lat);
     },
-    updateCurrentLong: ({commit}, long) => {
+    updateCurrentLong: ({ commit }, long) => {
         commit('setCurrentLong', long);
+    },
+    updateBounds: ({ commit }, bounds) => {
+        commit('setBounds', bounds);
     }
 };
 
@@ -29,6 +41,9 @@ const getters = {
     },
     getCurrentLong: state => {
         return state.currentLong;
+    },
+    getBounds: state => {
+        return state.bounds;
     }
 };
 

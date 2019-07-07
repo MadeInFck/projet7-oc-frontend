@@ -1,6 +1,8 @@
+import '@babel/polyfill';
 import Vue from "vue";
+import './plugins/vuetify';
 import Vuetify from 'vuetify';
-import 'vuetify/dist/vuetify.min.css';
+import 'vuetify/src/stylus/app.styl';
 import App from "./App.vue";
 import router from "./routes/router";
 import store from "./store/store";

@@ -1,17 +1,18 @@
 <template>
-  <div>
-      <li v-on:click="dialog = true">
-        <span class="col-3"> {{ restaurant.restaurantName }} </span>
-        <span class="col-3 offset-1"> {{ average }} étoiles </span>  
+  <div v-if="average >= $store.getters.getRange[0] && average <= $store.getters.getRange[1] && needToDisplay">
+      <li @click="dialog = !dialog" class="row">
+        <p class="col-6"> {{ restaurant.restaurantName }} </p>
+        <p class="col-5 offset-1"><span>{{ average }} étoiles</span> </p>  
       </li>
-      <app-modal :restaurant="restaurant" :dialog="dialog"></app-modal>
+      {{ dialog }}
+      <app-modal :restaurant="restaurant" :dialog="dialog" @modalClosed="dialog=$event"></app-modal>
   </div>
   
 </template>
 
 <script>
 import Modal from "./Modal.vue";
-
+import { mapGetters } from "vuex";
 export default {
     props: ['restaurant'],
     data () {
@@ -23,18 +24,33 @@ export default {
       appModal: Modal
     },
     computed: {
+      ...mapGetters({
+      bounds: 'getBounds'
+      }),
       average: function() {
         let sum = 0;
         for (let i=0; i < this.restaurant.ratings.length; i++) {
           sum += this.restaurant.ratings[i].stars;
         }
-
         return sum/this.restaurant.ratings.length;
+      },
+      needToDisplay: function() {
+        if (this.restaurant.long >= this.bounds.ga.j && this.restaurant.long <= this.bounds.ga.l && this.restaurant.lat >= this.bounds.na.j && this.restaurant.lat <= this.bounds.na.l) {
+          return true;
+        } else {
+          return false;
+        }
       }
     }
 };
 </script>
 
 <style scoped>
-font-size: 20px;
+li {
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px gray;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+}
 </style>

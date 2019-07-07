@@ -1,46 +1,29 @@
-
 const state = {
-  list: null
+  list: null,
+  range: [1,5]
 };
 
 const mutations = {
-  /*  'BUY_STOCK'(state, {stockId, quantity, stockPrice}) {
-        const record = state.stocks.find(element => element.id == stockId);
-        if (record) {
-            record.quantity += quantity;
-        } else {
-            state.stocks.push({
-                id: stockId,
-                quantity: quantity
-            });
-        }
-        state.funds -= stockPrice * quantity;
-    } */
     setRestaurantData: (state, data) => {
         state.list = data;
+    },
+    setRange: (state,data) => {
+      state.range = data;
     }
 };
 
 const actions = {
-  /* sellStock({commit}, order) {
-        commit('SELL_STOCK', order);
-    } */
+  updateRange: ({ commit }, data) => {
+    commit('setRange', data);
+  }
 };
 
 const getters = {
-  /*  stockPortfolio (state, getters) {
-        return state.stocks.map(stock => {
-            const record = getters.stocks.find(element => element.id == stock.id);
-            return {
-                id: stock.id,
-                quantity: stock.quantity,
-                name: record.name,
-                price: record.price
-            }
-        });
-    } */
   getList: state => {
     return state.list;
+  },
+  getRange: state => {
+    return state.range;
   }
 };
 

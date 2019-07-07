@@ -1,15 +1,14 @@
 <template>
-  <div>
+  <v-app>
     <app-header></app-header>
     <div class="container-fluid">
       <div class="row" id="content">
         <app-map></app-map>
         <app-list></app-list>
       </div>
-      
     </div>
     <app-footer></app-footer>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -24,20 +23,26 @@ export default {
     appMap: GMap,
     appList: List,
     appFooter: Footer
+  },
+  mounted() {
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        position => {
+          this.$store.dispatch("updateCurrentLat", position.coords.latitude);
+          this.$store.dispatch("updateCurrentLong", position.coords.longitude);
+        },
+        null,
+        { enableHighAccuracy: true }
+      );
+    } else {
+      console.log('Pas de géolocalisation !');
+    }
+    this.$store.dispatch("loadData");
   }
 };
 </script>
 
 <style>
-/* body {
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  min-height: 100%;
-  min-width: 100%;
-  height: 100%;
-  width: 100%;
-} */
-
 header {
   color: white;
   padding-bottom: 20px;

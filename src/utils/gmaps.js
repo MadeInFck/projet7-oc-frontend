@@ -28,7 +28,7 @@ export default function init() {
     // the Google Maps script.
     const script = document.createElement('script');
     script.async = true;
-    script.defer = true;
+    script.defer = false;
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=${CALLBACK_NAME}`;
     script.onerror = rejectInitPromise;
     document.querySelector('head').appendChild(script);
