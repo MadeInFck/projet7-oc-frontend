@@ -10,6 +10,8 @@ import axios from 'axios';
 
 import "./registerServiceWorker";
 
+export const eventBus = new Vue();
+
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
 

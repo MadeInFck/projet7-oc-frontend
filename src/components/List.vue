@@ -8,7 +8,7 @@
           v-model="range"
           :max="5"
           :min="1"
-          step="1"
+          :step="1"
           :tick-labels="tickLabels"
           thumb-label="always"
         ></v-range-slider>
@@ -18,10 +18,9 @@
     <h4 class="text-center">Liste des restaurants à proximité</h4>
     <ul>
       <app-list-element v-for="(restaurant, index) in list" :restaurant="restaurant" :key="index"></app-list-element>
-      {{ $store.getters.getCurrentLat}}
+      <!-- {{ $store.getters.getCurrentLat}}
       {{ $store.getters.getCurrentLong }}
-      {{ $store.getters.getRange[0] }}
-      {{ $store.getters.getRange[1] }}
+      {{ $store.getters.getRange }} -->
     </ul>
   </div>
 </template>
@@ -29,6 +28,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Element from "./ListElement.vue";
+
 export default {
   components: {
     appListElement: Element
@@ -44,10 +44,11 @@ export default {
     }),
     range: {
       get() {
-        return this.$store.getters.range;
+        return this.$store.getters.getRange;
       },
       set(value) {
         this.$store.dispatch("updateRange", value);
+        eventBus.$emit('rangeChanged', this.range);
       }
     }
   }

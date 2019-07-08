@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex justify-content-center">
-    <img v-bind:src="image"  />
+  <div>
+    <img v-bind:src="image" />
   </div>
   
 </template>
@@ -12,7 +12,7 @@ export default {
   props: ["restaurant"],
   data: function() {
     return {
-      image: null
+      image: ""
     };
   },
   methods: {
@@ -32,11 +32,9 @@ export default {
     }
   },
   async mounted() {
-    this.image = "";
-    console.log(this.restaurant.address, this.restaurant.lat);
     try {
       const response = await axios.get(
-        "https://maps.googleapis.com/maps/api/streetview?location=" + this.restaurant.lat + "," + this.restaurant.long + "&size=456x456&fov=90&pitch=10&key=AIzaSyA_fr7kCL4Itf8Ihl6O31BVsttti8jwtNs",
+        "https://maps.googleapis.com/maps/api/streetview?location=" + this.restaurant.lat + "," + this.restaurant.long + "&size=400x400&fov=90&pitch=10&key=AIzaSyA_fr7kCL4Itf8Ihl6O31BVsttti8jwtNs",
         {
           headers: {
             accept: "image/jpeg"

@@ -35,7 +35,7 @@ export default {
         { enableHighAccuracy: true }
       );
     } else {
-      console.log('Pas de géolocalisation !');
+      console.log("Pas de géolocalisation !");
     }
     this.$store.dispatch("loadData");
   }
@@ -43,6 +43,13 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 header {
   color: white;
   padding-bottom: 20px;
@@ -50,7 +57,7 @@ header {
 
 #content {
   min-height: 480px;
-  height: 600px;
+  height: 100%;
   margin: 15px auto 30px auto;
 }
 </style>
