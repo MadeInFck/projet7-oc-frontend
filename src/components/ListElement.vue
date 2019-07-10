@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
+import Modal from "./ModalRestaurant.vue";
 import { mapGetters } from "vuex";
 import { eventBus } from "../main";
 
@@ -39,6 +39,7 @@ export default {
         }
         return sum/this.restaurant.ratings.length;
       },
+      //Check if item needs to be displayed : within map bounds each time they're updated
       needToDisplay() {
         if (this.restaurant.long >= this.bounds.ga.j && this.restaurant.long <= this.bounds.ga.l && this.restaurant.lat >= this.bounds.na.j && this.restaurant.lat <= this.bounds.na.l) {
           return true;
@@ -62,5 +63,9 @@ li {
   box-shadow: 10px 5px 5px gray;
   margin-bottom: 5px;
   font-size: 1.5em;
+}
+
+li:hover {
+  curso: pointer;
 }
 </style>

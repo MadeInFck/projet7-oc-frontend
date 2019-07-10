@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     closeModal: function() {
-      this.dialog = false;
       this.$emit("modalClosed", false);
     }
   }

@@ -1,7 +1,6 @@
 const state = {
-  list: null,
-  range: [1,5],
-  filteredList: null
+  list: [],
+  range: [1,5]
 };
 
 const mutations = {
@@ -11,8 +10,8 @@ const mutations = {
     setRange: (state,  data) => {
       state.range = data;
     },
-    setFilteredList: (state, data) => {
-      state.filteredList = data;
+    mutateList: (state, data) => {
+      state.list.push(data);
     }
 };
 
@@ -20,8 +19,8 @@ const actions = {
   updateRange: ({ commit }, data) => {
     commit('setRange', data);
   },
-  updateFilteredList: ({ commit }, data) => {
-    commit('setFilteredList', data);
+  updateWithNewRestaurant: ({ commit }, data) => {
+    commit('mutateList', data);
   }
 };
 
@@ -31,9 +30,6 @@ const getters = {
   },
   getRange: state => {
     return state.range;
-  },
-  getFilteredList: state => {
-    return state.filteredList;
   }
 };
 

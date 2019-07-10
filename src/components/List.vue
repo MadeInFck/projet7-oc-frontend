@@ -28,6 +28,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Element from "./ListElement.vue";
+import { eventBus } from "../main";
 
 export default {
   components: {
