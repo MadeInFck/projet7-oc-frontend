@@ -1,4 +1,7 @@
-# projet7-oc-frontend
+[# projet7-oc-frontend](https://projet7.oc.madeinfck.com)
+Ce projet a été réalisé dans le cadre du parcours DevApp FrontEnd proposé par OpenClassrooms.
+Il utilise le framework VueJS ainsi que les modules axios,vuetify et vuelidate.
+
 
 ## Project setup
 ```
