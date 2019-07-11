@@ -2,7 +2,7 @@
   <div class="col-6 text-left">
     <v-card flat color="transparent">
       <v-subheader>Filtrer votre recherche</v-subheader>
-      <br>
+      <br />
       <v-flex offset-xs2 xs8>
         <v-range-slider
           v-model="range"
@@ -14,21 +14,21 @@
         ></v-range-slider>
       </v-flex>
     </v-card>
-    <hr>
+    <hr />
     <h4 class="text-center">Liste des restaurants à proximité</h4>
     <ul>
       <app-list-element v-for="(restaurant, index) in list" :restaurant="restaurant" :key="index"></app-list-element>
       <!-- {{ $store.getters.getCurrentLat}}
       {{ $store.getters.getCurrentLong }}
-      {{ $store.getters.getRange }} -->
+      {{ $store.getters.getRange }}-->
     </ul>
   </div>
 </template>
  
 <script>
-import { mapGetters } from "vuex";
 import Element from "./ListElement.vue";
 import { eventBus } from "../main";
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -49,7 +49,7 @@ export default {
       },
       set(value) {
         this.$store.dispatch("updateRange", value);
-        eventBus.$emit('rangeChanged', this.range);
+        eventBus.$emit("rangeChanged", this.range);
       }
     }
   }

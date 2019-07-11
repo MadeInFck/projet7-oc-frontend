@@ -1,26 +1,36 @@
 const state = {
   list: [],
-  range: [1,5]
+  range: [1, 5]
 };
 
 const mutations = {
-    setRestaurantData: (state, data) => {
-        state.list = data;
-    },
-    setRange: (state,  data) => {
-      state.range = data;
-    },
-    mutateList: (state, data) => {
-      state.list.push(data);
-    }
+  setRestaurantData: (state, data) => {
+    state.list = data;
+  },
+  setRange: (state, data) => {
+    state.range = data;
+  },
+  setNewRestaurant: (state, data) => {
+    state.list.push(data);
+  },
+  mutateRatingRestaurant: (state, data) => {
+    state.list.forEach((restaurant, index) => {
+      if (restaurant.restaurantName == data.restaurantName) {
+        state.list[index] = data;
+      }
+    });
+  }
 };
 
 const actions = {
   updateRange: ({ commit }, data) => {
-    commit('setRange', data);
+    commit("setRange", data);
   },
   updateWithNewRestaurant: ({ commit }, data) => {
-    commit('mutateList', data);
+    commit("setNewRestaurant", data);
+  },
+  updateRating: ({ commit }, data) => {
+    commit("mutateRatingRestaurant", data);
   }
 };
 

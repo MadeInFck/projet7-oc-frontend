@@ -105,7 +105,7 @@ export default {
       this.map = new this.google.maps.Map(this.$el, options);
 
       // Add marker on current position
-      const marker = new this.google.maps.Marker({
+      new this.google.maps.Marker({
         position: position,
         map: this.map,
         animation: google.maps.Animation.DROP,

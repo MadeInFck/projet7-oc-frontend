@@ -205,7 +205,7 @@ export default {
         long: longitude,
         ratings: [
           {
-            stars: this.stars[0],
+            stars: Number(this.stars[0]),
             comment: this.opinion
           }
         ]
