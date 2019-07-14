@@ -1,9 +1,9 @@
 <template>
   <div v-if="average >= range[0] && average <= range[1] && needToDisplay">
     <li @click="dialog = !dialog" class="row">
-      <p class="col-6">{{ restaurant.restaurantName }}</p>
-      <p class="col-5 offset-1">
-        <span>{{ average }} étoiles</span>
+      <p class="col-8 my-auto">{{ restaurant.restaurantName }}</p>
+      <p class="col-2 offset-2 my-auto">
+        <span>{{ average }} ⭐</span>
       </p>
     </li>
     <app-modal :restaurant="restaurant" :dialog="dialog" @modalClosed="dialog=$event"></app-modal>
@@ -35,9 +35,8 @@ export default {
       let sum = 0;
       for (let i = 0; i < this.restaurant.ratings.length; i++) {
         sum += this.restaurant.ratings[i].stars;
-        console.log(sum, this.restaurant.ratings[i]);
       }
-      return sum / this.restaurant.ratings.length;
+      return (sum / this.restaurant.ratings.length).toFixed(1);
     },
     //Check if item needs to be displayed : within map bounds each time they're updated
     needToDisplay() {

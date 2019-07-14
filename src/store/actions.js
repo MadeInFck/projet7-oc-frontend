@@ -1,5 +1,5 @@
-import data from "../data/data.js";
+//import data from "../data/data.js";
 
-export const loadData = ({ commit }) => {
+export const loadData = ({ commit }, data) => {
       commit("setRestaurantData", data);
 };

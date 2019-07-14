@@ -1,5 +1,5 @@
 <template>
-  <div class="col-6 text-left">
+  <div class="col-12 col-sm-6 text-left">
     <v-card flat color="transparent">
       <v-subheader>Filtrer votre recherche</v-subheader>
       <br />

@@ -6,7 +6,6 @@ import 'vuetify/src/stylus/app.styl';
 import App from "./App.vue";
 import router from "./routes/router";
 import store from "./store/store";
-import axios from "axios";
 import Vuelidate from "vuelidate";
 import "./registerServiceWorker";
 

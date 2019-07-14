@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import gmapsInit from "../utils/gmaps";
 import axios from "axios";
+
 export default {
   props: ["restaurant"],
   data: function() {
@@ -16,7 +16,7 @@ export default {
     };
   },
   methods: {
-    imageEncode: function(arrayBuffer) {
+    imageEncode(arrayBuffer) {
       let u8 = new Uint8Array(arrayBuffer);
       let b64encoded = btoa(
         [].reduce.call(

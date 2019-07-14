@@ -16,6 +16,7 @@ import Header from "./components/Header.vue";
 import GMap from "./components/Map.vue";
 import List from "./components/List.vue";
 import Footer from "./components/Footer";
+import { eventBus } from "./main";
 
 export default {
   components: {
@@ -23,21 +24,6 @@ export default {
     appMap: GMap,
     appList: List,
     appFooter: Footer
-  },
-  mounted() {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        position => {
-          this.$store.dispatch("updateCurrentLat", position.coords.latitude);
-          this.$store.dispatch("updateCurrentLong", position.coords.longitude);
-        },
-        null,
-        { enableHighAccuracy: true }
-      );
-    } else {
-      console.log("Pas de géolocalisation !");
-    }
-    this.$store.dispatch("loadData");
   }
 };
 </script>
