@@ -24,6 +24,9 @@ export default {
     appMap: GMap,
     appList: List,
     appFooter: Footer
+  },
+  mounted() {
+    
   }
 };
 </script>

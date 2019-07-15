@@ -63,7 +63,7 @@ export default {
         console.log(this.restaurant.ratings[i].stars);
         sum += this.restaurant.ratings[i].stars;
       }
-      let newAverage = sum / this.restaurant.ratings.length;
+      let newAverage = (sum / this.restaurant.ratings.length).toFixed(1);
       console.log("new average", this.newAverage);
       this.average = 4;
     }

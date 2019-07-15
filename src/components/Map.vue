@@ -72,10 +72,16 @@ export default {
           title: element.restaurantName
         });
         this.markers.push(marker);
-        this.google.maps.event.addListener(marker, "click", function() {
-          this.infoWindow.setContent(element.restaurantName);
-          this.infoWindow.open(this.map, this);
-        });
+        let infoWindow = new google.maps.InfoWindow();
+        this.google.maps.event.addListener(
+          marker,
+          "click",
+          function() {
+            infoWindow.setContent(element.restaurantName);
+            infoWindow.open(this.map, this);
+          },
+          { passive: true }
+        );
       });
     },
     //Clear all markers on map
@@ -84,7 +90,7 @@ export default {
         this.markers[i].setMap(null);
       }
       this.markers = [];
-    },
+    } /*,
     displayNewRestaurant() {
       const newRestaurant = this.list[this.list.length - 1];
       const positionNewMarker = new this.google.maps.LatLng(
@@ -97,11 +103,16 @@ export default {
         title: newRestaurant.restaurantName
       });
       this.markers.push(marker);
-      this.google.maps.event.addListener(marker, "click", function() {
-        this.infoWindow.setContent(newRestaurant.restaurantName);
-        this.infoWindow.open(this.map, this);
-      });
-    },
+      this.google.maps.event.addListener(
+        marker,
+        "click",
+        function() {
+          this.infoWindow.setContent(newRestaurant.restaurantName);
+          this.infoWindow.open(this.map, marker);
+        },
+        { passive: true }
+      );
+    } */,
     displayGooglePlaces(request) {
       this.service.nearbySearch(request, (results, status) => {
         if (status == this.google.maps.places.PlacesServiceStatus.OK) {
@@ -171,15 +182,21 @@ export default {
               map: this.map,
               animation: this.google.maps.Animation.DROP,
               icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
               },
               title: "Position actuelle"
             });
+        let infoWindow = new google.maps.InfoWindow();
 
-            this.google.maps.event.addListener(marker, "click", function() {
-              this.infoWindow.setContent("Position actuelle");
-              this.infoWindow.open(this.map, this);
-            });
+            this.google.maps.event.addListener(
+              marker,
+              "click",
+              function() {
+                infoWindow.setContent("Position actuelle");
+                infoWindow.open(this.map, this);
+              },
+              { passive: true }
+            );
           },
           () => {
             this.handleLocationError(
@@ -215,7 +232,7 @@ export default {
 
       //Set and instantiate map
       const options = {
-        zoom: 15,
+        zoom: 18,
         center: position,
         mapTypeId: "satellite",
         streetViewControl: false,
@@ -229,43 +246,52 @@ export default {
       //Set google places service
       this.service = new this.google.maps.places.PlacesService(this.map);
 
-      const lat = this.map.getCenter().lat();
+      /* const lat = this.map.getCenter().lat();
       const lng = this.map.getCenter().lng();
       const location = new this.google.maps.LatLng(lat, lng);
       const request = {
         location: location,
-        radius: "4000",
+        radius: "1000",
         type: ["restaurant"]
       };
       //call function to get data from Google Places and display them
-      this.displayGooglePlaces(request);
+      this.displayGooglePlaces(request); */
 
       //Capture zoom in/out or pan to update bounds in store
-      this.google.maps.event.addListener(this.map, "idle", () => {
-        let bounds = this.map.getBounds();
-        this.$store.dispatch("updateBounds", bounds);
-        eventBus.$emit("boundsChanged", bounds);
-        const lat = this.map.getCenter().lat();
-        const lng = this.map.getCenter().lng();
-        this.currentCenter = { lat: lat, lng: lng };
+      this.google.maps.event.addListener(
+        this.map,
+        "idle",
+        () => {
+          let bounds = this.map.getBounds();
+          this.$store.dispatch("updateBounds", bounds);
+          eventBus.$emit("boundsChanged", bounds);
+          const lat = this.map.getCenter().lat();
+          const lng = this.map.getCenter().lng();
+          this.currentCenter = { lat: lat, lng: lng };
 
-        const request = {
-          location: this.currentCenter,
-          radius: "4000",
-          type: ["restaurant"]
-        };
-        //this.listResultsDetailed = [];
-        this.displayGooglePlaces(request);
-      });
+          const request = {
+            location: this.currentCenter,
+            radius: "4000",
+            type: ["restaurant"]
+          };
+          //this.listResultsDetailed = [];
+          this.displayGooglePlaces(request);
+        },
+        { passive: true }
+      );
 
       //Capture click on map
-      this.map.addListener("click", event => {
-        let latitude = event.latLng.lat();
-        let longitude = event.latLng.lng();
-        this.map.panTo(new this.google.maps.LatLng(latitude, longitude));
-        this.coordsNewRestaurant = { lat: latitude, lng: longitude };
-        this.dialog = true;
-      });
+      this.map.addListener(
+        "click",
+        event => {
+          let latitude = event.latLng.lat();
+          let longitude = event.latLng.lng();
+          this.map.panTo(new this.google.maps.LatLng(latitude, longitude));
+          this.coordsNewRestaurant = { lat: latitude, lng: longitude };
+          this.dialog = true;
+        },
+        { passive: true }
+      );
     } catch (error) {
       console.error(error);
     }
@@ -280,7 +306,8 @@ export default {
       this.displayMarkers;
     });
     eventBus.$on("newRestaurantAdded", () => {
-      this.displayNewRestaurant();
+      //this.displayNewRestaurant();
+      this.displayMarkers();
     });
   },
   beforeUpdate() {
