@@ -16,11 +16,8 @@
     </v-card>
     <hr />
     <h4 class="text-center">Liste des restaurants à proximité</h4>
-    <ul>
+    <ul class="list">
       <app-list-element v-for="(restaurant, index) in list" :restaurant="restaurant" :key="index"></app-list-element>
-      <!-- {{ $store.getters.getCurrentLat}}
-      {{ $store.getters.getCurrentLong }}
-      {{ $store.getters.getRange }}-->
     </ul>
   </div>
 </template>
@@ -28,7 +25,7 @@
 <script>
 import Element from "./ListElement.vue";
 import { eventBus } from "../main";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -56,8 +53,18 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 ul {
   list-style-type: none;
+}
+
+.list {
+  max-height: 300px;
+  width: 100%;
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 </style>
