@@ -9,7 +9,9 @@ const state = {
     na: {
       j: 0,
       l: 0
-    }
+    },
+    google: null,
+    map: null,
   }
 };
 
@@ -22,6 +24,12 @@ const mutations = {
   },
   setBounds: (state, bounds) => {
     state.bounds = bounds;
+  },
+  setGoogle: (state, google) => {
+    state.google = google;
+  },
+  setMap: (state, map) => {
+    state.map = map;
   }
 };
 
@@ -34,6 +42,12 @@ const actions = {
   },
   updateBounds: ({ commit }, bounds) => {
     commit("setBounds", bounds);
+  },
+  updateGoogle: ({ commit }, google) => {
+    commit("setGoogle", google);
+  },
+  updateMap: ({ commit }, map) => {
+    commit("setMap", map);
   }
 };
 
@@ -46,6 +60,12 @@ const getters = {
   },
   getBounds: state => {
     return state.bounds;
+  },
+  getGoogle: state => {
+    return state.google;
+  },
+  getMap: state => {
+    return state.map;
   }
 };
 

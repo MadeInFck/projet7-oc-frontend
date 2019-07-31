@@ -1,9 +1,9 @@
 <template>
-  <div v-if="average >= range[0] && average <= range[1] && needToDisplay">
-    <li @click="dialog = !dialog" class="row">
-      <p class="col-8 my-auto">{{ restaurant.restaurantName }}</p>
+  <div v-if="restaurant.rating >= range[0] && restaurant.rating <= range[1] && needToDisplay">
+    <li @click="openModal" class="row">
+      <p class="col-8 mx-auto">{{ restaurant.restaurantName }}</p>
       <p class="col-2 offset-2 my-auto">
-        <span>{{ average }} ⭐</span>
+        <span>{{ restaurant.rating }} ⭐</span>
       </p>
     </li>
     <app-modal :restaurant="restaurant" :dialog="dialog" @modalClosed="dialog=$event"></app-modal>
@@ -28,16 +28,10 @@ export default {
   computed: {
     ...mapGetters({
       bounds: "getBounds",
-      range: "getRange"
+      range: "getRange",
+      google: "getGoogle",
+      map: "getMap"
     }),
-    //Compute average of ratings
-    average() {
-      let sum = 0;
-      for (let i = 0; i < this.restaurant.ratings.length; i++) {
-        sum += this.restaurant.ratings[i].stars;
-      }
-      return (sum / this.restaurant.ratings.length).toFixed(1);
-    },
     //Check if item needs to be displayed : within map bounds each time they're updated
     needToDisplay() {
       if (!this.bounds) {
@@ -65,7 +59,34 @@ export default {
       }
       let newAverage = (sum / this.restaurant.ratings.length).toFixed(1);
       console.log("new average", this.newAverage);
-      this.average = 4;
+    },
+    openModal() {
+      this.dialog = !this.dialog;
+      if (this.restaurant.placeId == "") {
+        return;
+      }
+      if (this.restaurant.ratings.length > 0) {
+        return;
+      }
+      let request = {
+        placeId: this.restaurant.placeId,
+        fields: ["formatted_address", "reviews"]
+      };
+
+      let service = new this.google.maps.places.PlacesService(this.map);
+      service.getDetails(request, (place, status) => {
+        if (status == this.google.maps.places.PlacesServiceStatus.OK) {
+          for (let j = 0; j < place.reviews.length; j++) {
+            this.restaurant.ratings.push({
+              stars: place.reviews[j].rating,
+              comment: place.reviews[j].text
+            });
+          }
+          this.restaurant.address = place.formatted_address;
+        } else {
+          console.log("List element : ",status);
+        }
+      });
     }
   },
   created() {

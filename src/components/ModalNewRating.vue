@@ -104,6 +104,10 @@ export default {
         stars: Number(this.stars[0]),
         comment: this.opinion
       });
+      console.log(this.restaurant.ratingsNumber, this.restaurant.rating);
+      data.rating = (((this.restaurant.ratingsNumber * this.restaurant.rating) + Number(this.stars[0])) / (this.restaurant.ratingsNumber + 1)).toFixed(1);
+      data.ratingsNumber ++;
+      console.log(data.ratingsNumber, data.rating, data.ratings);
       this.$store.dispatch("updateRating", data);
       //Reset form
       this.stars = "";

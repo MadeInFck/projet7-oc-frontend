@@ -37,6 +37,7 @@
 #pieddepage {
   padding-top: 20px;
   padding-bottom: 10px;
+  bottom: 0;
 }
 
 .socialmedia {

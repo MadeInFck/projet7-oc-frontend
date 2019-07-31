@@ -59,4 +59,7 @@ export default {
 };
 </script>
 <style>
+#streetview, #modal-text {
+  width: 400px;
+}
 </style>

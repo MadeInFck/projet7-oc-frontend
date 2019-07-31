@@ -33,7 +33,8 @@ export default {
   },
   data: function() {
     return {
-      tickLabels: ["1⭐", "2⭐", "3⭐", "4⭐", "5⭐"]
+      tickLabels: ["1⭐", "2⭐", "3⭐", "4⭐", "5⭐"],
+      google: null
     };
   },
   computed: {

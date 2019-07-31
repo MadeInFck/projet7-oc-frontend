@@ -208,7 +208,10 @@ export default {
             stars: Number(this.stars[0]),
             comment: this.opinion
           }
-        ]
+        ],
+        placeId: "",
+        rating: Number(this.stars[0]).toFixed(1),
+        ratingsNumber: 1
       };
       //Dispatch new created restaurant to list in store
       this.$store.dispatch("updateWithNewRestaurant", newRestaurant);
