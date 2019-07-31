@@ -6,7 +6,7 @@
         <span>{{ restaurant.rating }} ⭐</span>
       </p>
     </li>
-    <app-modal :restaurant="restaurant" :dialog="dialog" @modalClosed="dialog=$event"></app-modal>
+    <app-modal :restaurant="restaurant" :dialog="dialog" :loading="loading" @modalClosed="dialog=$event"></app-modal>
   </div>
 </template>
 
@@ -19,7 +19,8 @@ export default {
   props: ["restaurant"],
   data() {
     return {
-      dialog: false
+      dialog: false,
+      isLoading: false
     };
   },
   components: {
@@ -50,16 +51,6 @@ export default {
     }
   },
   methods: {
-    computeNewAverage() {
-      console.log(this.restaurant.ratings.length);
-      let sum = 0;
-      for (let i = 0; i < this.restaurant.ratings.length; i++) {
-        console.log(this.restaurant.ratings[i].stars);
-        sum += this.restaurant.ratings[i].stars;
-      }
-      let newAverage = (sum / this.restaurant.ratings.length).toFixed(1);
-      console.log("new average", this.newAverage);
-    },
     openModal() {
       this.dialog = !this.dialog;
       if (this.restaurant.placeId == "") {
@@ -68,6 +59,7 @@ export default {
       if (this.restaurant.ratings.length > 0) {
         return;
       }
+      this.loading = true;
       let request = {
         placeId: this.restaurant.placeId,
         fields: ["formatted_address", "reviews"]
@@ -75,6 +67,7 @@ export default {
 
       let service = new this.google.maps.places.PlacesService(this.map);
       service.getDetails(request, (place, status) => {
+        
         if (status == this.google.maps.places.PlacesServiceStatus.OK) {
           for (let j = 0; j < place.reviews.length; j++) {
             this.restaurant.ratings.push({
@@ -83,9 +76,11 @@ export default {
             });
           }
           this.restaurant.address = place.formatted_address;
+          this.loading = false;
         } else {
           console.log("List element : ",status);
         }
+        
       });
     }
   },
