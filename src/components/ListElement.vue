@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       dialog: false,
-      isLoading: false
+      loading: false
     };
   },
   components: {

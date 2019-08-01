@@ -110,7 +110,6 @@ export default {
     },
     displayGooglePlaces(request) {
       this.service.nearbySearch(request, (results, status) => {
-        console.log(results);
         if (status == this.google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
             let newRestaurant = {
@@ -197,8 +196,8 @@ export default {
       this.infoWindow.setPosition(pos);
       this.infoWindow.setContent(
         browserHasGeolocation
-          ? "Error: The Geolocation service failed."
-          : "Error: Your browser doesn't support geolocation."
+          ? "Erreur: le service de geolocalisation n'est pas disponible."
+          : "Erreur: votre navigateur ne supporte pas la géolocalisation."
       );
       this.infoWindow.open(this.map);
     }
@@ -266,7 +265,6 @@ export default {
       );
 
       this.$store.dispatch("updateGoogle", this.google);
-      console.log(this.google);
       this.$store.dispatch("updateMap", this.map);
     } catch (error) {
       console.error(error);
@@ -291,5 +289,6 @@ export default {
 <style scoped>
 #map {
   min-height: 400px;
+  max-height: 100%
 }
 </style>

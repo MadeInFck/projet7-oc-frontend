@@ -34,7 +34,8 @@ export default {
 <style>
 html,
 body {
-  height: 100vh;
+  height: 100%;
+  max-height:100%;
   margin: 0;
   padding: 0;
 }
@@ -45,8 +46,7 @@ header {
 }
 
 #content {
-  min-height: 480px;
-  height: 100%;
-  margin: 15px auto 30px auto;
+  min-height: 750px;
+  margin: 60px auto 30px auto;
 }
 </style>

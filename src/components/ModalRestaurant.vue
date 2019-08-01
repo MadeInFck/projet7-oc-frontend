@@ -2,15 +2,16 @@
   <div>
     <div v-if="dialog">
       <v-layout row>
-        <v-dialog lazy origin width="400" dark v-model="dialog">
+        <v-dialog origin width="400" dark v-model="dialog">
           <v-card>
             <div id="streetview">
               <app-streetview :restaurant="restaurant"></app-streetview>
             </div>
-              <app-bounce-loader class="mx-auto" loading="loading" color="rgb(93,156,82)" size="80" sizeUnit="px"></app-bounce-loader>
+              <app-bounce-loader class="mx-auto" :loading="loading" color="#bada55" :size="80" sizeUnit="px"></app-bounce-loader>
             <div id="modal-text">
               <v-card-title
                 class="headline d-flex justify-content-center"
+                width="400"
               >{{ restaurant.restaurantName }}</v-card-title>
               <v-card-text
                 v-for="(rating, index) in restaurant.ratings"
@@ -20,8 +21,8 @@
 
             <v-card-actions justify-center>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat @click="openRatingModal">Donner son avis</v-btn>
-              <v-btn color="green darken-1" flat @click="closeModal">Fermer</v-btn>
+              <v-btn color="green darken-1" text @click="openRatingModal">Donner son avis</v-btn>
+              <v-btn color="green darken-1" text @click="closeModal">Fermer</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -67,10 +68,10 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 #streetview,
 #modal-text {
-  width: 400px;
+  max-width: 100%;
   margin-bottom: 10px;
 }
 </style>

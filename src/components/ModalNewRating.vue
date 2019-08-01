@@ -39,8 +39,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="green darken-1" flat @click="closeModal">Fermer</v-btn>
-            <v-btn color="green darken-1" flat @click="addRating">Ajouter</v-btn>
+            <v-btn color="green darken-1" text @click="closeModal">Fermer</v-btn>
+            <v-btn color="green darken-1" text @click="addRating">Ajouter</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

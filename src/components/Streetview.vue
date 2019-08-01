@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img v-bind:src="image" />
+    <img id="streetview" v-bind:src="image" />
   </div>
   
 </template>
@@ -50,5 +50,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#streetview {
+  background-size:contain;
+  max-width: 100%;
+  display:block;
+}
 </style>

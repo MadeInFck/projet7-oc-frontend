@@ -35,9 +35,9 @@
 
 <style scoped>
 #pieddepage {
-  padding-top: 20px;
-  padding-bottom: 10px;
-  bottom: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin: auto auto 0;
 }
 
 .socialmedia {
