@@ -1,8 +1,8 @@
 <template>
   <div v-if="restaurant.rating >= range[0] && restaurant.rating <= range[1] && needToDisplay">
     <li @click="openModal" class="row">
-      <p class="col-8 mx-auto">{{ restaurant.restaurantName }}</p>
-      <p class="col-2 offset-2 my-auto">
+      <p class="col-8 mx-auto my-auto">{{ restaurant.restaurantName }}</p>
+      <p class="col-3 offset-1 my-auto mx-auto">
         <span>{{ restaurant.rating }} ⭐</span>
       </p>
     </li>

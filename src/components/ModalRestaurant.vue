@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="displayModal">
     <div v-if="dialog">
       <v-layout row>
         <v-dialog origin width="400" dark v-model="dialog">
@@ -73,5 +73,9 @@ export default {
 #modal-text {
   max-width: 100%;
   margin-bottom: 10px;
+}
+
+#displayModal {
+  z-index: 1000;
 }
 </style>
