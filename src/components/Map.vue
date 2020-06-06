@@ -234,6 +234,7 @@ export default {
         "idle",
         () => {
           let bounds = this.map.getBounds();
+          console.log(bounds);
           this.$store.dispatch("updateBounds", bounds);
           eventBus.$emit("boundsChanged", bounds);
           const lat = this.map.getCenter().lat();

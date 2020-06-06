@@ -35,14 +35,15 @@ export default {
     }),
     //Check if item needs to be displayed : within map bounds each time they're updated
     needToDisplay() {
+      console.log(this.bounds);
       if (!this.bounds) {
         return;
       }
       if (
-        this.restaurant.long >= this.bounds.ga.j &&
-        this.restaurant.long <= this.bounds.ga.l &&
-        this.restaurant.lat >= this.bounds.na.j &&
-        this.restaurant.lat <= this.bounds.na.l
+        this.restaurant.long >= this.bounds.ka.g &&
+        this.restaurant.long <= this.bounds.ka.h &&
+        this.restaurant.lat >= this.bounds.oa.g &&
+        this.restaurant.lat <= this.bounds.oa.h
       ) {
         return true;
       } else {
